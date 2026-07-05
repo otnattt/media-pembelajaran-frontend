@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Dashboard from "../pages/admin/Dashboard";
+import Dashboard from "../Pages/admin/Dashboard";
 
 import InputField from "../Components/login/InputField";
 import PrimaryButton from "../Components/login/PrimaryButton";
