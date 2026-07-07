@@ -29,17 +29,17 @@ export default function Dashboard() {
     fetchStatistik();
   }, []);
 
-  const fetchStatistik = async () => {
-    try {
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/dashboard/statistik"
-      );
+ const fetchStatistik = async () => {
+  try {
+    const response = await axiosInstance.get(
+      "/dashboard/statistik"
+    );
 
-      setStats(response.data);
-    } catch (error) {
-      console.error("Gagal mengambil statistik:", error);
-    }
-  };
+    setStats(response.data);
+  } catch (error) {
+    console.error("Gagal mengambil statistik:", error);
+  }
+};
 
   return (
     <div>
