@@ -219,9 +219,7 @@ export default function QuizSection() {
   let newCorrect = correctAnswers;
 
   if (selected === current.answer) {
-
     newCorrect += current.poin;
-
     setCorrectAnswers(newCorrect);
   }
 
@@ -242,27 +240,32 @@ export default function QuizSection() {
       );
 
       // SUBMIT KE BACKEND
-     const handleSubmit = async () => {
-  try {
-    const response = await axiosInstance.post("/kuis/submit", {
-      id_siswa: siswa.id_siswa,
-      id_kuis: selectedQuiz,
-      jawaban: newAnswers,
-    });
+      const response = await axiosInstance.post(
+        "/kuis/submit",
+        {
+          id_siswa: siswa.id_siswa,
+          id_kuis: selectedQuiz,
+          jawaban: newAnswers,
+        }
+      );
 
-    console.log(response.data);
+      console.log(response.data);
 
-    setNilaiAkhir(response.data.nilai);
+      setNilaiAkhir(response.data.nilai);
 
-    setDone(true);
+      setDone(true);
 
-  } catch (error) {
-    console.log(error);
+    } catch (error) {
 
-    alert("Gagal menyimpan jawaban");
+      console.log(error);
+
+      alert("Gagal menyimpan jawaban");
+
+    }
+
   }
-};
 
+}
   // =========================
   // RESET
   // =========================
