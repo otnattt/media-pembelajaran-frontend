@@ -8,13 +8,14 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 
 import PageHeader from "../../Components/admin/PageHeader.jsx";
 import Button from "../../Components/admin/Button.jsx";
 import Modal from "../../Components/admin/Modal.jsx";
 
 
+const API_URL = import.meta.env.VITE_API_URL;
 export default function VideoPage() {
   const [items, setItems] = useState([]);
 
@@ -57,10 +58,10 @@ useEffect(() => {
     const fetchVideo = async () => {
 
     try {
-
-        const response = await axios.get(
-            "http://127.0.0.1:8000/api/video"
-        );
+ 
+        const response = await axiosInstance.get("/video");
+        
+      
 
         console.log(response.data);
 
@@ -161,34 +162,26 @@ useEffect(() => {
         formData.append("deskripsi", form.deskripsi);
         formData.append("durasi_video", form.durasi_video);
         formData.append("file_video", form.file);
+        for (const pair of formData.entries()) {
+    console.log(pair[0], pair[1]);
+}
+ console.log(form.file);
+console.log(form.file instanceof File);
+  const response = await axiosInstance.post(
+    "/video",
+    formData,
+    {
+        timeout:0,
+        onUploadProgress:(progressEvent)=>{
+            const percent=Math.round(
+                (progressEvent.loaded * 100) /
+                progressEvent.total
+            );
 
-        const response = await axios.post(
-
-            "http://127.0.0.1:8000/api/video",
-
-            formData,
-
-            {
-
-                timeout: 0,
-
-                onUploadProgress: (progressEvent) => {
-
-                    const percent = Math.round(
-
-                        (progressEvent.loaded * 100) /
-
-                        progressEvent.total
-
-                    );
-
-                    setUploadProgress(percent);
-
-                }
-
-            }
-
-        );
+            setUploadProgress(percent);
+        }
+    }
+);
 
         toast.success("Video berhasil diupload");
 
@@ -245,14 +238,13 @@ useEffect(() => {
 
   try {
 
-    const response = await axios.put(
-      `http://127.0.0.1:8000/api/video/${selectedVideo.id_vidpem}`,
+    const response = await axiosInstance.put( `/video/${selectedVideo.id_vidpem}`,
       {
-        judul: selectedVideo.judul,
-        deskripsi: selectedVideo.deskripsi,
-        status_video: selectedVideo.status_video,
+          judul:selectedVideo.judul,
+          deskripsi:selectedVideo.deskripsi,
+          status_video:selectedVideo.status_video
       }
-    );
+      )
 
     console.log(response.data);
 
@@ -366,7 +358,7 @@ const formatTime = (time) => {
                 controls
                 preload="metadata"
                 className="w-full h-40 object-cover"
-                src={`http://127.0.0.1:8000/api/video/stream/${encodeURIComponent(v.file_video)}`}
+               src={`${API_URL}/video/stream/${v.id_vidpem}`}
                 onTimeUpdate={(e) => {
                     const id = v.id_vidpem;
 

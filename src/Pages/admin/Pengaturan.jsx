@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 import { toast } from "sonner";
 
 import PageHeader from "../../Components/admin/PageHeader.jsx";
@@ -28,9 +28,9 @@ export default function Pengaturan() {
 
   const loadGuru = async () => {
     try {
-      const res = await axios.get(
-        `http://127.0.0.1:8000/api/guru/${user.id_guru}`
-      );
+      const res = await axiosInstance.get(
+  `/guru/${user.id_guru}`
+);
 
       const data = {
         nama: res.data.data.nama,
@@ -67,10 +67,10 @@ export default function Pengaturan() {
     }
 
     try {
-      await axios.put(
-        `http://127.0.0.1:8000/api/guru/${user.id_guru}`,
-        form
-      );
+      await axiosInstance.put(
+  `/guru/${user.id_guru}`,
+  form
+);
 
       if (profileChanged && passwordChanged) {
         toast.success("Profil dan password berhasil diperbarui");

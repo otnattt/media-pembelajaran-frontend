@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../config/axios";
 import Dashboard from "../Pages/admin/Dashboard";
 
 import InputField from "../Components/login/InputField";
@@ -34,13 +34,10 @@ export default function Login() {
     setErrors({});
 
     try {
-        const response = await axios.post(
-            "http://127.0.0.1:8000/api/login",
-            {
-                login: form.login,
-                password: form.password,
-            }
-        );
+        const response = await axiosInstance.post("/login", {
+            login: form.login,
+            password: form.password,
+        });
 
         const data = response.data;
 

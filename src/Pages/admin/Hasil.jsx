@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 
 import {
   FileSpreadsheet,
@@ -33,9 +33,7 @@ export default function Hasil() {
 
     try {
 
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/hasil"
-      );
+      const response = await axiosInstance.get("/hasil");
 
       setHasil(response.data);
 
@@ -64,24 +62,20 @@ export default function Hasil() {
   const exp = async (type) => {
   try {
 
-    const url =
+    const endpoint =
       type === "Excel"
-        ? "http://127.0.0.1:8000/api/hasil/export/excel"
-        : "http://127.0.0.1:8000/api/hasil/export/pdf";
+        ? "/hasil/export/excel"
+        : "/hasil/export/pdf";
 
-    const response = await axios.get(url, {
+    const response = await axiosInstance.get(endpoint, {
       responseType: "blob",
     });
 
-    const blob = new Blob(
-      [response.data]
-    );
+    const blob = new Blob([response.data]);
 
-    const link =
-      document.createElement("a");
+    const link = document.createElement("a");
 
-    link.href =
-      window.URL.createObjectURL(blob);
+    link.href = window.URL.createObjectURL(blob);
 
     link.download =
       type === "Excel"
@@ -94,17 +88,14 @@ export default function Hasil() {
 
     document.body.removeChild(link);
 
-    toast.success(
-      `Export ${type} berhasil`
-    );
+    toast.success(`Export ${type} berhasil`);
 
   } catch (error) {
 
     console.error(error);
 
-    toast.error(
-      `Export ${type} gagal`
-    );
+    toast.error(`Export ${type} gagal`);
+
   }
 };
 

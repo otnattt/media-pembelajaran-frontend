@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause, Clock, Tag, Maximize, ChevronLeft, ChevronRight } from "lucide-react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 
 export default function MediaSection() {
   const [videos, setVideos] = useState([]);
@@ -37,7 +37,7 @@ useEffect(() => {
 
   const fetchVideos = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/video");
+      const res = await axiosInstance.get("/video");
       const active = res.data.filter(v => v.status_video === "aktif");
       setVideos(active);
       setIndex(0);
@@ -199,7 +199,7 @@ const showVideoControls = () => {
                       ref={videoRef}
                       preload="auto"
                                   
-                       src={`http://127.0.0.1:8000/api/video/stream/${video.file_video}`}
+                       src={`${import.meta.env.VITE_API_URL}/video/stream/${video.file_video}`}
                        className="w-full rounded-xl"
                        onLoadedMetadata={() => {
                       const v = videoRef.current;

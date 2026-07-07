@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 import { useState, useEffect } from "react";
 import { Trophy, Hash } from "lucide-react";
 
@@ -60,9 +60,7 @@ export default function QuizSection() {
   async function fetchStudents() {
     try {
 
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/siswa-aktif"
-      );
+      const res = await axiosInstance.get("/video");
 
       console.log("DEBUG KUIS:");
       console.log(response.data);
@@ -79,9 +77,7 @@ export default function QuizSection() {
     async function fetchQuizList() {
   try {
 
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/kuis/list"
-    );
+   const response = await axiosInstance.get("/kuis/list");
 
     const data = response.data;
 
@@ -118,9 +114,9 @@ export default function QuizSection() {
   async function fetchQuestions(idKuis) {
   try {
 
-    const response = await axios.get(
-      `http://127.0.0.1:8000/api/kuis/${idKuis}/soal`
-    );
+    const response = await axiosInstance.get(
+`/kuis/${idKuis}/soal`
+);
 
     setQuestions(response.data);
 
@@ -246,8 +242,8 @@ export default function QuizSection() {
       );
 
       // SUBMIT KE BACKEND
-      const response = await axios.post(
-  "http://127.0.0.1:8000/api/kuis/submit",
+      const response = await axiosInstance.post(
+"/kuis/submit",
   {
     id_siswa: siswa.id_siswa,
     id_kuis: selectedQuiz,

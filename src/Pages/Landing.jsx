@@ -1,4 +1,4 @@
-import api from "../services/api";
+import api from "../config/axios";
 import { Helmet } from "react-helmet";
 
 import Navbar from "../Components/landing/Navbar";

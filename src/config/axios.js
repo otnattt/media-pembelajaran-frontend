@@ -1,37 +1,32 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: '/api',  // Menggunakan proxy
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 10000,
     headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: "application/json",
     },
 });
 
-// Interceptor untuk menambahkan token
-axiosInstance.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
-);
+axiosInstance.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
 
-// Interceptor untuk handle response
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+});
+
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = '/login';
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.href = "/login";
         }
+
         return Promise.reject(error);
     }
 );

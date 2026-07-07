@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 import { toast } from "sonner";
 
 import {
@@ -100,9 +100,7 @@ const [soalList, setSoalList] = useState(
   const fetchKuis = async () => {
   try {
 
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/admin/kuis"
-    );
+    const response = await axiosInstance.get("/admin/kuis");
 
     setDataKuis(response.data);
 
@@ -305,9 +303,11 @@ const [soalList, setSoalList] = useState(
   soal: soalList,
 };
 
-    await axios.post(
-      "http://127.0.0.1:8000/api/kuis",
-      dataKuis
+console.log("DATA KUIS");
+console.log(JSON.stringify(dataKuis, null, 2));
+    await axiosInstance.post(
+    "/kuis",
+    dataKuis
     );
 
     fetchKuis();
@@ -333,24 +333,20 @@ const [soalList, setSoalList] = useState(
 
   } catch (error) {
 
-    console.log(error.response?.data);
+    console.log(error);
 
-    if (error.response?.data?.errors) {
-      const firstError = Object.values(
-        error.response.data.errors
-      )[0][0];
+    if (error.response) {
 
-      toast.error(firstError);
-      return;
+        console.log(error.response.status);
+        console.log(error.response.data);
+
+    } else {
+
+        console.log(error.message);
+
     }
 
-    toast.error(
-      error.response?.data?.message ||
-      "Gagal menambahkan kuis"
-
-      
-    );
-  }
+}
 };
 
 
@@ -440,10 +436,10 @@ const dataUpdate = {
       soal: editSoalList,
     };
 
-    await axios.put(
-      `http://127.0.0.1:8000/api/kuis/${editForm.id_kuis}`,
-      dataUpdate
-    );
+    await axiosInstance.put(
+    `/kuis/${editForm.id_kuis}`,
+    dataUpdate
+);
 
     fetchKuis();
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 
 import StatCard from "../../Components/admin/StatCard.jsx";
 import PageHeader from "../../Components/admin/PageHeader.jsx";

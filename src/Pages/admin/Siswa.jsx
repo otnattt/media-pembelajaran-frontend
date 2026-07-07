@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../config/axios";
 import { toast } from "sonner";
 
 import {
@@ -57,9 +57,7 @@ export default function Siswa() {
   const fetchSiswa = async () => {
     try {
 
-      const response = await axios.get(
-        "http://127.0.0.1:8000/api/siswa"
-      );
+      const response = await axiosInstance.get("/siswa");
 
       setDataSiswa(response.data);
 
@@ -99,13 +97,13 @@ export default function Siswa() {
 
     try {
 
-      await axios.post(
-        "http://127.0.0.1:8000/api/siswa",
-        {
-          nis: form.nis,
-          nama: form.nama,
-        }
-      );
+      await axiosInstance.post(
+  "/siswa",
+  {
+    nis: form.nis,
+    nama: form.nama,
+  }
+);
 
       fetchSiswa();
 
@@ -150,14 +148,14 @@ export default function Siswa() {
 
     try {
 
-      await axios.put(
-        `http://127.0.0.1:8000/api/siswa/${editForm.id_siswa}`,
-        {
-          nis: editForm.nis,
-          nama: editForm.nama,
-          status_siswa: editForm.status_siswa,
-        }
-      );
+      await axiosInstance.put(
+  `/siswa/${editForm.id_siswa}`,
+  {
+    nis: editForm.nis,
+    nama: editForm.nama,
+    status_siswa: editForm.status_siswa,
+  }
+);
 
       fetchSiswa();
 
