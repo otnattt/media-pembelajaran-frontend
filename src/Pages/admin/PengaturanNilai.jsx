@@ -20,21 +20,21 @@ const PengaturanNilai = ({ onClose }) => {
         getJumlahSoal();
     }, []);
 
-    const getJumlahSoal = async () => {
-        try {
-            const response = await axios.get(
-                "http://127.0.0.1:8000/api/jumlah-soal"
-            );
+   const getJumlahSoal = async () => {
+    try {
+        const response = await axiosInstance.get(
+            "/jumlah-soal"
+        );
 
-            setJmlSoal(response.data.jml_soal);
+        setJmlSoal(response.data.jml_soal);
 
-        } catch (error) {
-            console.error(error);
+    } catch (error) {
+        console.error(error);
 
-            setMessage("Gagal mengambil data.");
-            setMessageType("error");
-        }
-    };
+        setMessage("Gagal mengambil data.");
+        setMessageType("error");
+    }
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,12 +57,12 @@ const PengaturanNilai = ({ onClose }) => {
 
         try {
 
-            await axios.put(
-                "http://127.0.0.1:8000/api/jumlah-soal",
-                {
-                    jml_soal: Number(jmlSoal),
-                }
-            );
+            await axiosInstance.put(
+    "/jumlah-soal",
+    {
+        jml_soal: Number(jmlSoal),
+    }
+);
 
             setMessage("Jumlah soal berhasil diperbarui.");
             setMessageType("success");
