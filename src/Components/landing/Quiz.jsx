@@ -242,29 +242,26 @@ export default function QuizSection() {
       );
 
       // SUBMIT KE BACKEND
-      const response = await axiosInstance.post(
-"/kuis/submit",
-  {
-    id_siswa: siswa.id_siswa,
-    id_kuis: selectedQuiz,
-    jawaban: newAnswers,
+     const handleSubmit = async () => {
+  try {
+    const response = await axiosInstance.post("/kuis/submit", {
+      id_siswa: siswa.id_siswa,
+      id_kuis: selectedQuiz,
+      jawaban: newAnswers,
+    });
+
+    console.log(response.data);
+
+    setNilaiAkhir(response.data.nilai);
+
+    setDone(true);
+
+  } catch (error) {
+    console.log(error);
+
+    alert("Gagal menyimpan jawaban");
   }
-);
-
-console.log(res.data);
-
-setNilaiAkhir(response.data.nilai);
-
-      setDone(true);
-
-    } catch (error) {
-
-      console.log(error);
-
-      alert("Gagal menyimpan jawaban");
-    }
-  }
-  }
+};
 
   // =========================
   // RESET
