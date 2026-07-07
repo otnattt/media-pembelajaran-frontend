@@ -28,10 +28,9 @@ export default function Pengaturan() {
 
   const loadGuru = async () => {
     try {
-      const res = await axiosInstance.get(
-  `/guru/${user.id_guru}`
+     const res = await axiosInstance.get(
+    `/guru/${user.id_guru}`
 );
-
       const data = {
         nama: res.data.data.nama,
         username: res.data.data.username,
