@@ -199,7 +199,7 @@ const showVideoControls = () => {
                       ref={videoRef}
                       preload="auto"
                                   
-                       src={`${import.meta.env.VITE_API_URL}/video/stream/${video.file_video}`}
+                       src={`${import.meta.env.VITE_API_URL}/video/stream/${video.id_vidpem}`}
                        className="w-full rounded-xl"
                        onLoadedMetadata={() => {
                       const v = videoRef.current;
