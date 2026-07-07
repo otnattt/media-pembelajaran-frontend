@@ -26,6 +26,7 @@ export default function QuizSection() {
   const [started, setStarted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // =========================
   // STATE KUIS
@@ -231,7 +232,9 @@ export default function QuizSection() {
     setIdx(idx + 1);
 
   } else {
+if (submitting) return;
 
+setSubmitting(true);
     try {
 
       // CARI SISWA
@@ -257,11 +260,13 @@ export default function QuizSection() {
 
     } catch (error) {
 
-      console.log(error);
+  setSubmitting(false);
 
-      alert("Gagal menyimpan jawaban");
+  console.log(error);
 
-    }
+  alert("Gagal menyimpan jawaban");
+
+}
 
   }
 
@@ -521,13 +526,17 @@ export default function QuizSection() {
 
                   <button
                     onClick={handleNext}
-                    disabled={selected === null}
+                    disabled={selected === null || submitting}
                     className="bg-brand-secondary text-white px-8 sm:px-10 py-3 rounded-xl font-bold shadow-lg shadow-brand-secondary/30 disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5 transition-transform"
                   >
 
-                    {idx + 1 === questions.length
+                    {
+                      submitting
+                      ? "Menyimpan..."
+                      : idx + 1 === questions.length
                       ? "Selesai"
-                      : "Lanjut"}
+                      : "Lanjut"
+                      }
                   </button>
                 </div>
               </div>
