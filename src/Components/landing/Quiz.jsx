@@ -257,6 +257,7 @@ setSubmitting(true);
       setNilaiAkhir(response.data.nilai);
 
       setDone(true);
+      setSubmitting(false);
 
     } catch (error) {
 
@@ -281,6 +282,7 @@ setSubmitting(true);
     setCorrectAnswers(0);
     setDone(false);
     setStarted(false);
+    setSubmitting(false);
 
     setAnswers([]);
     setQuestions([]);
