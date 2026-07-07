@@ -58,18 +58,18 @@ export default function QuizSection() {
   // FETCH SISWA
   // =========================
   async function fetchStudents() {
-    try {
+  try {
+    const res = await axiosInstance.get("/siswa");
 
-      const res = await axiosInstance.get("/video");
+    console.log("DEBUG SISWA:");
+    console.log(res.data);
 
-      console.log("DEBUG KUIS:");
-      console.log(response.data);
-      setStudents(response.data);
+    setStudents(res.data);
 
-    } catch (error) {
-      console.log(error);
-    }
+  } catch (error) {
+    console.log(error);
   }
+}
 
   // =========================
   // Kuis List
@@ -251,7 +251,7 @@ export default function QuizSection() {
   }
 );
 
-console.log(response.data);
+console.log(res.data);
 
 setNilaiAkhir(response.data.nilai);
 
