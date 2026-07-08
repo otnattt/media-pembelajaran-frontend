@@ -91,6 +91,9 @@ export default function QuizSection() {
 
     } else if (data.length === 1) {
 
+      console.log("LIST KUIS", data);
+      console.log("AUTO PILIH", data[0].id_kuis);
+
       setSelectedQuiz(data[0].id_kuis);
       setShowQuizSelection(false);
 
@@ -153,7 +156,8 @@ export default function QuizSection() {
   // START QUIZ
   // =========================
   async function startQuiz() {
-
+console.log("selectedQuiz =", selectedQuiz);
+console.log("quizList =", quizList);
   if (!selectedStudent) {
     setError("Pilih siswa terlebih dahulu");
     return;
