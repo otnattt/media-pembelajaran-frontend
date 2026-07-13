@@ -36,7 +36,7 @@ export default function Navbar() {
             href="#mediaplayer"
             className="hover:text-brand-secondary transition-colors"
           >
-            Video Materi
+            Video Pembelajaran
           </a>
 
           <a
