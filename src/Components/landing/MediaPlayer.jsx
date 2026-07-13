@@ -173,21 +173,21 @@ const showVideoControls = () => {
   return (
     <section
         id="mediaplayer"
-        className="py-24 bg-card scroll-mt-24"
+        className="py-16 bg-card scroll-mt-24"
     >
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
 
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold">
+        <div className="text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold">
             Video Pembelajaran
           </h2>
         </div>
 
-        <div className="bg-black rounded-2xl p-4 relative">
+        <div className="bg-black rounded-2xl p-3 relative shadow-xl">
 
           {/* VIDEO */}
           <div
-              className="relative"
+              className="relative aspect-video"
               onMouseMove={showVideoControls}
               onMouseEnter={showVideoControls}
               onMouseLeave={() => {
@@ -197,6 +197,7 @@ const showVideoControls = () => {
 
             <video
                       ref={videoRef}
+                      className="w-full h-full object-cover rounded-xl"
                       preload="auto"
                                   
                        src={`${import.meta.env.VITE_API_URL}/video/stream/${video.id_vidpem}`}
