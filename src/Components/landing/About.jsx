@@ -4,11 +4,11 @@ import aboutImg from "../../assets/about-illustration.jpg";
 const points = [
   {
     dot: "bg-brand-accent/20 text-brand-accent",
-    text: "Materi sejarah Kerajaan Hindu, Buddha, dan Islam di Indonesia sesuai kurikulum kelas IV SD.",
+    text: "Materi sejarah Kerajaan Hindu, Buddha, dan Islam di Indonesia.",
   },
   {
     dot: "bg-brand-secondary/20 text-brand-secondary",
-    text: "Animasi, ilustrasi, dan narasi yang menarik sehingga memudahkan siswa memahami materi.",
+    text: "Animasi, ilustrasi, dan narasi yang menarik.",
   },
   {
     dot: "bg-brand-primary/20 text-brand-primary",
@@ -50,7 +50,7 @@ export default function AboutSection() {
             </h2>
 
             <p className="text-ink-soft text-lg leading-relaxed">
-              Media pembelajaran interaktif yang dirancang untuk membantu siswa kelas IV SDN Tambahrejo 02 mempelajari sejarah kerajaan di Indonesia dengan cara yang lebih menarik, mudah dipahami, dan menyenangkan. Materi disajikan dalam bentuk motion graphic yang dipadukan dengan kuis interaktif untuk meningkatkan pemahaman siswa.
+              Media pembelajaran interaktif yang dirancang untuk membantu siswa kelas IV SDN Tambahrejo 02 mempelajari sejarah kerajaan di Indonesia dengan cara yang lebih menarik, mudah dipahami, dan menyenangkan.
             </p>
 
             <div className="grid grid-cols-1 gap-3">
