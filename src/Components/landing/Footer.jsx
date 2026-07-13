@@ -24,8 +24,7 @@ export default function Footer() {
 
             <p className="text-sm leading-relaxed">
               Sistem pembelajaran interaktif sejarah Kerajaan Indonesia untuk
-              siswa kelas IV SDN Tambahrejo 02. Belajar lebih bermakna dengan
-              motion graphic.
+              siswa kelas IV SDN Tambahrejo 02.
             </p>
           </div>
 
@@ -93,7 +92,8 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="pt-8 border-t border-white/10 text-center text-xs">
-          &copy; {year}  Media Pembelajaran Interaktif  — SDN Tambahrejo 02. Semua Hak Dilindungi.
+          &copy; {year}  Media Pembelajaran Interaktif  — SDN Tambahrejo 02. 
+          Semua Hak Dilindungi.
         </div>
       </div>
     </footer>
